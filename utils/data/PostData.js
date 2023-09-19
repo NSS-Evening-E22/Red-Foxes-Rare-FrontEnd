@@ -21,7 +21,7 @@ const getPosts = () => new Promise((resolve, reject) => {
 });
 
 const createPosts = (payload) => new Promise((resolve, reject) => {
-  fetch(`${dbUrl}/posts.json`, {
+  fetch(`${dbUrl}/posts`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -45,8 +45,22 @@ const deletePost = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const updatePosts = (postObj) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/posts/${postObj.Id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(postObj),
+  })
+    .then((response) => response.json())
+    .then(resolve)
+    .catch(reject);
+});
+
 export {
   getPosts,
   createPosts,
-  deletePost
+  deletePost,
+  updatePosts
 }
