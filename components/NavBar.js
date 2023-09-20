@@ -24,7 +24,7 @@ export default function NavBar() {
               <Nav.Link>Home</Nav.Link>
             </Link>
             <Link passHref href="/Post/post">
-              <Nav.Link>Delete Me</Nav.Link>
+              <Nav.Link>Posts</Nav.Link>
             </Link>
             <Link passHref href="/createTag">
               <Nav.Link>Create Tag</Nav.Link>

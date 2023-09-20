@@ -1,6 +1,4 @@
-
 const dbUrl = 'https://localhost:7033';
-
 
 const getPosts = () => new Promise((resolve, reject) => {
   fetch(`${dbUrl}/posts`, {
@@ -12,7 +10,7 @@ const getPosts = () => new Promise((resolve, reject) => {
     .then((response) => response.json())
     .then((data) => {
       if (data) {
-        resolve(Object.values(data));
+        resolve(data);
       } else {
         resolve([]);
       }
@@ -58,9 +56,24 @@ const updatePosts = (postObj) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getSinglePost = (postId) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/posts/${postId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      resolve(data);
+    })
+    .catch(reject);
+});
+
 export {
   getPosts,
   createPosts,
   deletePost,
-  updatePosts
-}
+  updatePosts,
+  getSinglePost,
+};
