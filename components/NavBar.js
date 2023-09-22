@@ -29,7 +29,7 @@ export default function NavBar() {
             <Link passHref href="/createTag">
               <Nav.Link>Create Tag</Nav.Link>
             </Link>
-            <Link passHref href="/manage user">
+            <Link passHref href="/viewusers">
               <Nav.Link>View Users</Nav.Link>
             </Link>
             <Button variant="danger" onClick={signOut}>
