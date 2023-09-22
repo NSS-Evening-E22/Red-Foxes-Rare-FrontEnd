@@ -7,7 +7,14 @@ const getPosts = () => new Promise((resolve, reject) => {
       'Content-Type': 'application/json',
     },
   })
-    .then((data) => resolve(Object.values(data)))
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        resolve(data);
+      } else {
+        resolve([]);
+      }
+    })
     .catch(reject);
 });
 
@@ -53,15 +60,17 @@ const updatePosts = (Id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getSinglePost = (Id) => new Promise((resolve, reject) => {
-  fetch(`${dbUrl}/posts/${Id}.json`, {
+const getSinglePost = (postId) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/posts/${postId}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
   })
     .then((response) => response.json())
-    .then((data) => resolve(data))
+    .then((data) => {
+      resolve(data);
+    })
     .catch(reject);
 });
 
