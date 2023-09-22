@@ -1,6 +1,4 @@
-
 const dbUrl = 'https://localhost:7033';
-
 
 const getPosts = () => new Promise((resolve, reject) => {
   fetch(`${dbUrl}/posts`, {
@@ -62,5 +60,5 @@ export {
   getPosts,
   createPosts,
   deletePost,
-  updatePosts
-}
+  updatePosts,
+};
