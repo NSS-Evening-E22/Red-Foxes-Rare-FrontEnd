@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { deletePost } from '../utils/data/PostData';
@@ -7,7 +8,7 @@ import { deletePost } from '../utils/data/PostData';
 function PostCard({ postObj, onUpdate }) {
   const deleteThisPost = () => {
     if (window.confirm(`Delete ${postObj.title}?`)) {
-      deletePost(postObj.Id).then(() => onUpdate());
+      deletePost(postObj.id).then(() => onUpdate());
     }
   };
 
@@ -30,10 +31,12 @@ function PostCard({ postObj, onUpdate }) {
           {postObj.content}
         </p>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <Button variant="dark" className="mr-2" href={`/post/${postObj.Id}`}>
-            VIEW
-          </Button>
-          <Button variant="dark" className="mr-2" href={`/post/Edit/${postObj.Id}`}>
+          <Link passHref href={`/Post/${postObj.id}`}>
+            <Button variant="dark" className="mr-2">
+              VIEW
+            </Button>
+          </Link>
+          <Button variant="dark" className="mr-2" href={`/post/Edit/${postObj.id}`}>
             EDIT
           </Button>
           <Button variant="dark" onClick={deleteThisPost}>
@@ -50,7 +53,7 @@ PostCard.propTypes = {
     image: PropTypes.string,
     title: PropTypes.string,
     content: PropTypes.string,
-    Id: PropTypes.string,
+    id: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
