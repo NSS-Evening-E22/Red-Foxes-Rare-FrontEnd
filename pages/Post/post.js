@@ -5,13 +5,13 @@ import { getPosts } from '../../utils/data/PostData';
 import { useAuth } from '../../utils/context/authContext';
 import PostCard from '../../components/PostCard';
 
-function Home() {
+function PostHome() {
   const [posts, setPosts] = useState([]);
 
   const { user } = useAuth();
 
   const getAllThePosts = () => {
-    getPosts(user.uid).then(setPosts);
+    getPosts(user).then(setPosts);
   };
 
   useEffect(() => {
@@ -33,4 +33,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default PostHome;

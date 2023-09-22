@@ -1,6 +1,4 @@
-
 const dbUrl = 'https://localhost:7033';
-
 
 const getPosts = () => new Promise((resolve, reject) => {
   fetch(`${dbUrl}/posts`, {
@@ -9,14 +7,7 @@ const getPosts = () => new Promise((resolve, reject) => {
       'Content-Type': 'application/json',
     },
   })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data) {
-        resolve(Object.values(data));
-      } else {
-        resolve([]);
-      }
-    })
+    .then((data) => resolve(Object.values(data)))
     .catch(reject);
 });
 
@@ -28,8 +19,13 @@ const createPosts = (payload) => new Promise((resolve, reject) => {
     },
     body: JSON.stringify(payload),
   })
-    .then((response) => response.json())
-    .then((data) => resolve(data))
+    .then(async (res) => {
+      let data;
+      if (res.ok) {
+        data = await res.json();
+        resolve(data);
+      }
+    })
     .catch(reject);
 });
 
@@ -45,16 +41,27 @@ const deletePost = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const updatePosts = (postObj) => new Promise((resolve, reject) => {
-  fetch(`${dbUrl}/posts/${postObj.Id}`, {
+const updatePosts = (Id) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/posts/${Id}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(postObj),
+    body: JSON.stringify(Id),
+  })
+    .then(resolve)
+    .catch(reject);
+});
+
+const getSinglePost = (Id) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/posts/${Id}.json`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
   })
     .then((response) => response.json())
-    .then(resolve)
+    .then((data) => resolve(data))
     .catch(reject);
 });
 
@@ -62,5 +69,6 @@ export {
   getPosts,
   createPosts,
   deletePost,
-  updatePosts
-}
+  updatePosts,
+  getSinglePost,
+};

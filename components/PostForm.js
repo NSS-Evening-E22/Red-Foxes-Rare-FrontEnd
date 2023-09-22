@@ -6,25 +6,31 @@ import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import { useAuth } from '../utils/context/authContext';
 import { createPosts, updatePosts } from '../utils/data/PostData';
+import { checkUser } from '../utils/auth';
+import getAllCategories from '../utils/data/CategoryData';
 
 const initialState = {
-  description: '',
   image: '',
-  console: '',
-  genre: '',
+  content: '',
   title: '',
 };
 
 function PostForm({ obj }) {
   const [formInput, setFormInput] = useState(initialState);
+  const [category, setCategory] = useState([]);
+  const [rareUser, setRareUser] = useState({});
   const router = useRouter();
   const { user } = useAuth();
 
+  // useEffect(() => {
+  //   if (obj.Id) {
+  //     setFormInput(obj);
+  //   }
+  // }, [obj]);
   useEffect(() => {
-    if (obj.Id) {
-      setFormInput(obj);
-    }
-  }, [obj]);
+    getAllCategories().then(setCategory);
+    checkUser(user.uid).then(setRareUser);
+  }, [user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,13 +44,13 @@ function PostForm({ obj }) {
     e.preventDefault();
     if (obj.Id) {
       updatePosts(formInput)
-        .then(() => router.push(`/post/${obj.Id}`));
+        .then(() => router.push('/Post/post'));
     } else {
-      const payload = { ...formInput, uid: user.uid };
+      const payload = { ...formInput, rareUser: rareUser[0].Id };
       createPosts(payload).then(({ name }) => {
         const patchPayload = { Id: name };
         updatePosts(patchPayload).then(() => {
-          router.push('/');
+          router.push('/Post/post');
         });
       });
     }
@@ -90,6 +96,28 @@ function PostForm({ obj }) {
         />
       </Form.Group>
 
+      <Form.Group className="mb-3" controlId="formGridLevel">
+        <Form.Select
+          aria-label="Category"
+          name="CategoriesId"
+          onChange={handleChange}
+          className="mb-3"
+          value={obj.categoryId}
+        >
+          <option value="">Select a Category</option>
+          {
+            category.map((Categories) => (
+              <option
+                key={Categories.id}
+                value={Categories.id}
+              >
+                {Categories.label}
+              </option>
+            ))
+          }
+        </Form.Select>
+      </Form.Group>
+
       {/* SUBMIT BUTTON  */}
       <Button type="submit">{obj.Id ? 'Update' : 'Create'} Post</Button>
     </Form>
@@ -102,6 +130,7 @@ PostForm.propTypes = {
     content: PropTypes.string,
     title: PropTypes.string,
     Id: PropTypes.string,
+    categoryId: PropTypes.number,
   }),
 };
 
