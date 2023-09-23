@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Button } from 'react-bootstrap';
-import { getPosts } from '../../utils/data/PostData';
-import { useAuth } from '../../utils/context/authContext';
-import PostCard from '../../components/PostCard';
+import { getPosts } from '../utils/data/PostData';
+import { useAuth } from '../utils/context/authContext';
+import PostCard from '../components/PostCard';
 
-function Home() {
+function Posts() {
   const [posts, setPosts] = useState([]);
 
   const { user } = useAuth();
@@ -33,4 +33,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Posts;

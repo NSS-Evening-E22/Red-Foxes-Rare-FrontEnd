@@ -1,9 +1,7 @@
-import { clientCredentials } from '../client';
+const dbUrl = 'https://localhost:7033';
 
-const endpoint = clientCredentials.databaseURL;
-
-const getUserDetails = (id) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/rareusers/${id}`, {
+const getSingleUser = (uid) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/rareusers/${uid}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -14,8 +12,8 @@ const getUserDetails = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const allUsers = () => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/rareusers`, {
+const getUsers = () => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/rareusers`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -33,7 +31,7 @@ const allUsers = () => new Promise((resolve, reject) => {
 });
 
 const createUser = (payload) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/register`, {
+  fetch(`${dbUrl}/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -43,7 +41,7 @@ const createUser = (payload) => new Promise((resolve, reject) => {
     .then((response) => response.json())
     .then((data) => {
       const setcode = { firebaseKey: data.name };
-      fetch(`${endpoint}/rareusers/${setcode.firebaseKey}`, {
+      fetch(`${dbUrl}/rareusers/${setcode.firebaseKey}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -55,7 +53,7 @@ const createUser = (payload) => new Promise((resolve, reject) => {
 });
 
 export {
-  getUserDetails,
+  getSingleUser,
   createUser,
-  allUsers,
+  getUsers,
 };

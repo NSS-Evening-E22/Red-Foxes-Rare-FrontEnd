@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useRouter } from 'next/router';
-import { createTag } from '../utils/data/tagsData';
+import { createTag } from '../../utils/data/tagsData';
 
 const initialState = {
   label: '',
