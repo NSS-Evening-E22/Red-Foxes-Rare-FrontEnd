@@ -59,4 +59,3 @@ export {
   createUser,
   allUsers,
 };
-
