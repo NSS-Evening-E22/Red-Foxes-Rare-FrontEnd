@@ -19,7 +19,7 @@ const getTags = () => new Promise((resolve, reject) => {
 });
 
 const updateTags = (payload) => new Promise((resolve, reject) => {
-  fetch(`${dbUrl}/books/${payload.firebaseKey}.json`, {
+  fetch(`${dbUrl}/tags/${payload.firebaseKey}.json`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',

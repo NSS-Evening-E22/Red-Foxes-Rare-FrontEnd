@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
-import { useAuth } from '../utils/context/authContext';
-import { createPosts, updatePosts } from '../utils/data/PostData';
+import { useAuth } from '../../utils/context/authContext';
+import { createPosts, updatePosts } from '../../utils/data/PostData';
 
 const initialState = {
   description: '',
