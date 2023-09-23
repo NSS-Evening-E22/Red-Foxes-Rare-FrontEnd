@@ -10,17 +10,21 @@ import { checkUser } from '../utils/auth';
 import getAllCategories from '../utils/data/CategoryData';
 
 const initialState = {
-  image: '',
-  content: '',
-  title: '',
+  ImageUrl: '',
+  Content: '',
+  Title: '',
+  Approved: false,
+  CategoryId: 0,
+
 };
 
 function PostForm({ obj }) {
   const [formInput, setFormInput] = useState(initialState);
   const [category, setCategory] = useState([]);
-  const [rareUser, setRareUser] = useState({});
+  const [, setRareUser] = useState({});
   const router = useRouter();
   const { user } = useAuth();
+  // console.warn(user);
 
   // useEffect(() => {
   //   if (obj.Id) {
@@ -42,17 +46,17 @@ function PostForm({ obj }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (obj.Id) {
+    console.warn(formInput);
+    if (formInput.Id) {
       updatePosts(formInput)
-        .then(() => router.push('/Post/post'));
+        .then(() => router.push('/Post/post/'));
     } else {
-      const payload = { ...formInput, rareUser: rareUser[0].Id };
-      createPosts(payload).then(({ name }) => {
-        const patchPayload = { Id: name };
-        updatePosts(patchPayload).then(() => {
-          router.push('/Post/post');
+      const payload = { ...formInput, PublicationDate: new Date(Date.now()), RareUserId: user.uid };
+      createPosts(payload)
+        .then(router.push('/Post/post/'))
+        .catch((error) => {
+          console.error('API Error:', error);
         });
-      });
     }
   };
 
@@ -64,9 +68,9 @@ function PostForm({ obj }) {
       <FloatingLabel controlId="floatingInput1" label="Post Title" className="mb-3">
         <Form.Control
           type="text"
-          placeholder="Enter a title"
-          name="title"
-          value={formInput.title}
+          placeholder="Enter a Title"
+          name="Title"
+          value={formInput.Title}
           onChange={handleChange}
           required
         />
@@ -75,10 +79,10 @@ function PostForm({ obj }) {
       {/* IMAGE INPUT  */}
       <FloatingLabel controlId="floatingInput2" label="Post Image" className="mb-3">
         <Form.Control
-          type="url"
+          type="text"
           placeholder="Enter an image url"
-          name="image"
-          value={formInput.image}
+          name="ImageUrl"
+          value={formInput.ImageUrl}
           onChange={handleChange}
           required
         />
@@ -89,8 +93,8 @@ function PostForm({ obj }) {
         <Form.Control
           type="text"
           placeholder="Content"
-          value={formInput.content}
-          name="content"
+          value={formInput.Content}
+          name="Content"
           onChange={handleChange}
           required
         />
@@ -99,12 +103,12 @@ function PostForm({ obj }) {
       <Form.Group className="mb-3" controlId="formGridLevel">
         <Form.Select
           aria-label="Category"
-          name="CategoriesId"
+          name="CategoryId"
           onChange={handleChange}
           className="mb-3"
-          value={obj.categoryId}
+          value={obj.CategoryId}
         >
-          <option value="">Select a Category</option>
+          <option>Select a Category</option>
           {
             category.map((Categories) => (
               <option
@@ -126,11 +130,13 @@ function PostForm({ obj }) {
 
 PostForm.propTypes = {
   obj: PropTypes.shape({
-    image: PropTypes.string,
-    content: PropTypes.string,
-    title: PropTypes.string,
+    ImageUrl: PropTypes.string,
+    Content: PropTypes.string,
+    Title: PropTypes.string,
     Id: PropTypes.string,
-    categoryId: PropTypes.number,
+    CategoryId: PropTypes.number,
+    RareUserId: PropTypes.string,
+    Approved: PropTypes.bool,
   }),
 };
 

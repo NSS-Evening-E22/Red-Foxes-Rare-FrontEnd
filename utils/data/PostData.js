@@ -19,10 +19,11 @@ const getPosts = () => new Promise((resolve, reject) => {
 });
 
 const createPosts = (payload) => new Promise((resolve, reject) => {
-  fetch(`${dbUrl}/posts`, {
+  fetch(`${dbUrl}/post`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      Accept: 'application/json',
     },
     body: JSON.stringify(payload),
   })

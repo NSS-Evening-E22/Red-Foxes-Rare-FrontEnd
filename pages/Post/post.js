@@ -15,7 +15,7 @@ function PostHome() {
   };
 
   useEffect(() => {
-    getAllThePosts();
+    getPosts();
   }, []);
 
   return (
