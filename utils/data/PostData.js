@@ -76,4 +76,5 @@ export {
   deletePost,
   updatePosts,
   getSinglePost,
+
 };
