@@ -31,12 +31,12 @@ function PostCard({ postObj, onUpdate }) {
           {postObj.content}
         </p>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <Link passHref href={`/post/${postObj.id}`}>
+          <Link passHref href={`/Post/${postObj.id}`}>
             <Button variant="dark" className="mr-2">
               VIEW
             </Button>
           </Link>
-          <Button variant="dark" className="mr-2" href={`/post/Edit/${postObj.id}`}>
+          <Button variant="dark" className="mr-2" href={`/Post/EditPost/${postObj.id}`}>
             EDIT
           </Button>
           <Button variant="dark" onClick={deleteThisPost}>
