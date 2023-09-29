@@ -7,11 +7,11 @@ export default function EditPost() {
   const [editItem, setEditItem] = useState({});
   const router = useRouter();
 
-  const { firebaseKey } = router.query;
+  const { Id } = router.query;
 
   useEffect(() => {
-    getSinglePost(firebaseKey).then(setEditItem);
-  }, [firebaseKey]);
+    getSinglePost(Id).then(setEditItem);
+  }, [Id]);
 
   return (<PostForm obj={editItem} />);
 }

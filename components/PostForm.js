@@ -108,7 +108,7 @@ function PostForm({ obj }) {
           className="mb-3"
           value={obj.CategoryId}
         >
-          <option>Select a Category</option>
+          <option value="">Select a Category</option>
           {
             category.map((Categories) => (
               <option

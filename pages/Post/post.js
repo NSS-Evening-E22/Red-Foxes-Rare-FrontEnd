@@ -2,20 +2,30 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Button } from 'react-bootstrap';
 import { getPosts } from '../../utils/data/PostData';
-import { useAuth } from '../../utils/context/authContext';
+// import { useAuth } from '../../utils/context/authContext';
 import PostCard from '../../components/PostCard';
 
-function PostHome() {
+function Home() {
   const [posts, setPosts] = useState([]);
 
-  const { user } = useAuth();
-
   const getAllThePosts = () => {
-    getPosts(user).then(setPosts);
+    getPosts()
+      .then((data) => {
+        if (data.length === 0) {
+          console.log('No posts found.');
+          // You can display a message to the user or handle it as needed
+        } else {
+          console.log('Posts received:', data);
+          setPosts(data);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching posts:', error);
+      });
   };
 
   useEffect(() => {
-    getPosts();
+    getAllThePosts();
   }, []);
 
   return (
@@ -33,4 +43,4 @@ function PostHome() {
   );
 }
 
-export default PostHome;
+export default Home;

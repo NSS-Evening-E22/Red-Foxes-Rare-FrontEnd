@@ -31,7 +31,7 @@ function PostCard({ postObj, onUpdate }) {
           {postObj.content}
         </p>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <Link passHref href={`/Post/${postObj.id}`}>
+          <Link passHref href={`/post/${postObj.id}`}>
             <Button variant="dark" className="mr-2">
               VIEW
             </Button>
@@ -53,7 +53,7 @@ PostCard.propTypes = {
     image: PropTypes.string,
     title: PropTypes.string,
     content: PropTypes.string,
-    id: PropTypes.string,
+    id: PropTypes.number,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };

@@ -38,13 +38,12 @@ const createPosts = (payload) => new Promise((resolve, reject) => {
 });
 
 const deletePost = (id) => new Promise((resolve, reject) => {
-  fetch(`${dbUrl}/api/Posts/${id}`, {
+  fetch(`${dbUrl}/posts/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
     },
   })
-    .then((response) => response.json())
     .then((data) => resolve(data))
     .catch(reject);
 });
