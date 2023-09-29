@@ -11,11 +11,11 @@ function PostHome() {
   const { user } = useAuth();
 
   const getAllThePosts = () => {
-    getPosts(user).then(setPosts);
+    getPosts(user.uid).then(setPosts);
   };
 
   useEffect(() => {
-    getPosts();
+    getAllThePosts();
   }, []);
 
   return (
