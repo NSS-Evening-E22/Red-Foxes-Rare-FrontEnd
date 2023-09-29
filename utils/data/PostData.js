@@ -80,4 +80,5 @@ export {
   deletePost,
   updatePosts,
   getSinglePost,
+
 };
