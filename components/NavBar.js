@@ -23,9 +23,6 @@ export default function NavBar() {
             <Link passHref href="/">
               <Nav.Link>Home</Nav.Link>
             </Link>
-            <Link passHref href="/register">
-              <Nav.Link>Register</Nav.Link>
-            </Link>
             <Link passHref href="/posts">
               <Nav.Link>Posts</Nav.Link>
             </Link>
@@ -35,11 +32,7 @@ export default function NavBar() {
             <Link passHref href="/createTag">
               <Nav.Link>Create Tag</Nav.Link>
             </Link>
-
-            <Link passHref href="/userDetails">
-              <Nav.Link>Bio</Nav.Link>
-            </Link>
-            <Link passHref href="/viewuser">
+            <Link passHref href="/users">
               <Nav.Link>View Users</Nav.Link>
             </Link>
             <Button variant="danger" onClick={signOut}>
