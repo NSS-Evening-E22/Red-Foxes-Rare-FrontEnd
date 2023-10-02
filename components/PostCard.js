@@ -36,7 +36,7 @@ function PostCard({ postObj, onUpdate }) {
               VIEW
             </Button>
           </Link>
-          <Button variant="dark" className="mr-2" href={`/post/Edit/${postObj.id}`}>
+          <Button variant="dark" className="mr-2" href={`/Post/EditPost/${postObj.id}`}>
             EDIT
           </Button>
           <Button variant="dark" onClick={deleteThisPost}>
@@ -53,7 +53,7 @@ PostCard.propTypes = {
     image: PropTypes.string,
     title: PropTypes.string,
     content: PropTypes.string,
-    id: PropTypes.string,
+    id: PropTypes.number,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
