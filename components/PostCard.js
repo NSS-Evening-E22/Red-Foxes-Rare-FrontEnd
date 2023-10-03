@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { deletePost } from '../utils/data/PostData';
+import { deletePost } from '../utils/data/postData';
 
 function PostCard({ postObj, onUpdate }) {
   const deleteThisPost = () => {
@@ -15,7 +15,7 @@ function PostCard({ postObj, onUpdate }) {
   return (
     <Card
       className="hoverable-card"
-      style={{ width: '18rem', margin: '10px' }}
+      style={{ width: '20rem', margin: '10px', padding: '10px' }}
     >
       <Card.Img
         variant="top"
@@ -24,22 +24,22 @@ function PostCard({ postObj, onUpdate }) {
         style={{ height: '300px', objectFit: 'cover' }}
       />
       <Card.Body>
-        <Card.Title style={{ textAlign: 'center', marginBottom: '10px' }}>
+        <Card.Title style={{ textAlign: 'center', marginBottom: '18px' }}>
           {postObj.title}
         </Card.Title>
-        <p className="card-text bold" style={{ marginBottom: '5px' }}>
+        <p className="card-text bold" style={{ marginBottom: '18px' }}>
           {postObj.content}
         </p>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <Link passHref href={`/Post/${postObj.id}`}>
-            <Button variant="dark" className="mr-2">
+          <Link passHref href={`/post/${postObj.id}`}>
+            <Button variant="dark" id="post-view" className="mr-2">
               VIEW
             </Button>
           </Link>
-          <Button variant="dark" className="mr-2" href={`/post/Edit/${postObj.id}`}>
+          <Button variant="dark" id="post-edit" className="mr-2" href={`/post/edit/${postObj.id}`}>
             EDIT
           </Button>
-          <Button variant="dark" onClick={deleteThisPost}>
+          <Button variant="dark" id="post-delete" onClick={deleteThisPost}>
             DELETE
           </Button>
         </div>
@@ -53,7 +53,7 @@ PostCard.propTypes = {
     image: PropTypes.string,
     title: PropTypes.string,
     content: PropTypes.string,
-    id: PropTypes.string,
+    id: PropTypes.number,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };

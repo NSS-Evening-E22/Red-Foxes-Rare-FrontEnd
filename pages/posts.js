@@ -2,17 +2,26 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Button } from 'react-bootstrap';
-import { getPosts } from '../utils/data/PostData';
-import { useAuth } from '../utils/context/authContext';
 import PostCard from '../components/PostCard';
+import { getPosts } from '../utils/data/postData';
 
 function Posts() {
   const [posts, setPosts] = useState([]);
 
-  const { user } = useAuth();
-
   const getAllThePosts = () => {
-    getPosts(user.uid).then(setPosts);
+    getPosts()
+      .then((data) => {
+        if (data.length === 0) {
+          console.log('No posts found.');
+          // You can display a message to the user or handle it as needed
+        } else {
+          console.log('Posts received:', data);
+          setPosts(data);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching posts:', error);
+      });
   };
 
   useEffect(() => {
@@ -21,8 +30,8 @@ function Posts() {
 
   return (
     <div className="text-center my-4">
-      <Link href="/Post/newPost" passHref>
-        <Button variant="dark">Add A Post</Button>
+      <Link href="/post/newPost" passHref>
+        <Button variant="dark" className="add-post">Add A Post</Button>
       </Link>
       <div className="d-flex flex-wrap">
         {posts.map((post) => (

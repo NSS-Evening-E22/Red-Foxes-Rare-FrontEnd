@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { getSinglePost } from '../../utils/data/PostData';
+import { getSinglePost } from '../../utils/data/postData';
 import SinglePostPage from '../../components/SinglePostPage';
 
 export default function ViewSinglePost() {

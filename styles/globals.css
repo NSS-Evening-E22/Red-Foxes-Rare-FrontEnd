@@ -18,5 +18,89 @@ a {
 }
 
 body {
-  background-color: #88effd;
+  background-color: #f5f3f3;
+}
+
+/* NAVBAR */
+.navbar-collapse {
+  display: flex;
+  justify-content: center;
+}
+.navHome {
+  margin: 0 18px;
+}
+.navPosts {
+  margin: 0 18px;
+}
+.navTags {
+  margin: 0 18px;
+}
+.navUsers {
+  margin: 0 18px;
+}
+
+.signOut {
+  background: #d62323;
+  border-color: white;
+  color: white;
+  display: flex;
+  justify-content: right;
+  align-content: center;
+}
+
+/* POSTS PAGE */
+.add-post {
+  margin: 30px;
+  padding: 8px;
+}
+
+#post-view {
+  margin: 5px;
+  background: whitesmoke;
+  border-color: whitesmoke;
+  color: black;
+}
+
+#post-edit {
+  margin: 5px;
+  background: #76ebf2;
+  border-color: #76ebf2;
+}
+
+#post-delete {
+  margin: 5px;
+  background: #d62323;
+  border-color: #d62323;
+}
+
+.tag-form {
+  flex-direction: column;
+  width: 100%;
+}
+
+.tag-float {
+  margin: 20px;
+  width: 75%;
+}
+
+.tag-submit {
+  margin: 20px;
+}
+
+.u-post {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.up {
+  background: white;
+  border-color: black;
+  color: black;
+}
+
+.copy-btn {
+  background: whitesmoke;
+  color: red;
 }

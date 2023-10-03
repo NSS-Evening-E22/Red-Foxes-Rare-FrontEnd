@@ -19,39 +19,43 @@ const getPosts = () => new Promise((resolve, reject) => {
 });
 
 const createPosts = (payload) => new Promise((resolve, reject) => {
-  fetch(`${dbUrl}/posts`, {
+  fetch(`${dbUrl}/post`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      Accept: 'application/json',
     },
     body: JSON.stringify(payload),
   })
-    .then((response) => response.json())
-    .then((data) => resolve(data))
+    .then(async (res) => {
+      let data;
+      if (res.ok) {
+        data = await res.json();
+        resolve(data);
+      }
+    })
     .catch(reject);
 });
 
 const deletePost = (id) => new Promise((resolve, reject) => {
-  fetch(`${dbUrl}/api/Posts/${id}`, {
+  fetch(`${dbUrl}/posts/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
     },
   })
-    .then((response) => response.json())
     .then((data) => resolve(data))
     .catch(reject);
 });
 
-const updatePosts = (postObj) => new Promise((resolve, reject) => {
-  fetch(`${dbUrl}/posts/${postObj.Id}`, {
+const updatePosts = (id) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/posts/${id}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(postObj),
+    body: JSON.stringify(id),
   })
-    .then((response) => response.json())
     .then(resolve)
     .catch(reject);
 });
@@ -70,11 +74,29 @@ const getSinglePost = (postId) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getUserPosts = (userId) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/posts/users/${userId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        resolve(data);
+      } else {
+        resolve([]);
+      }
+    })
+    .catch(reject);
+});
+
 export {
   getPosts,
   createPosts,
   deletePost,
   updatePosts,
   getSinglePost,
-
+  getUserPosts,
 };
